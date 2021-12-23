@@ -62,14 +62,17 @@ const generatePDF = async (nombre) => {
 
   const SanChezFont = await pdfDoc.embedFont(fontBytes);
 
+  
   const pages = pdfDoc.getPages();
   const firstPage = pages[0];
+  const textSize = 58;
+  const textWidth = SanChezFont.widthOfTextAtSize(nombre, textSize);
 
 
   firstPage.drawText(nombre, {
-    x: 252,
+    x: firstPage.getWidth() / 2 - textWidth / 2,
     y: 450,
-    size: 58,
+    size: textSize,
     font: SanChezFont,
     color: rgb(0.59, 0.48, 0.71),
   });
